@@ -1,0 +1,1 @@
+python train.py --dataset-type sample --model-type sample   
