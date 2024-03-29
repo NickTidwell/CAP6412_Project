@@ -14,6 +14,7 @@ class ImageLabelApp:
         self.image_frame.pack()
         self.select_directory()
         self.image_files = [f for f in os.listdir(self.image_dir.get()) if f.lower().endswith((".png", ".jpg", ".jpeg"))]
+        self.image_files =sorted(self.image_files, key=lambda x: int(x.split(".")[0]))
         self.current_image_index = 0
         self.create_frame()
         self.loop_frames()
