@@ -55,13 +55,13 @@ class ImageLabelApp:
         image_name = self.image_files[self.current_image_index]
         question_list = [question.get() for question in self.questions]   
 
-        print(self.df['Image'].keys)
-        print(image_name)
         if image_name not in self.df['Image'].values:
             for question in question_list:
                 self.df = self.df.append({'Image': image_name, 'Question': question}, ignore_index=True)
             self.save_dataframe()
-
+         # Clear the questions list
+        for i in range(5):
+            self.questions[i].set("")
         # Move to the next image not labeled
         while self.image_files[self.current_image_index] in self.df['Image'].values:
             self.current_image_index += 1
