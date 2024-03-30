@@ -97,7 +97,6 @@ class ImageLabelApp:
         self.df['Image_Index'] = self.df['Image'].str.extract(r'(\d+)').astype(int)
         self.df.sort_values(by='Image_Index', inplace=True)
         self.df.reset_index(drop=True, inplace=True)
-        self.df.drop(columns=['Unnamed: 0'], inplace=True)
         self.df.drop(columns=['Image_Index'], inplace=True)
         self.df.to_csv(output_path, index=False)
         print(f"DataFrame saved to {output_path}")
