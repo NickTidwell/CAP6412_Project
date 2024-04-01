@@ -499,7 +499,7 @@ Image,Question
 000000128.jpg,what team is this jersey for?
 000000128.jpg,What number is on the uniform?
 000000128.jpg,What type of sport is this uniform for?
-000000129.jpg,Is the zipper open, closed, or in-between?
+000000129.jpg,"Is the zipper open, closed, or in-between?
 000000129.jpg,What color is the carpet?
 000000129.jpg,what kind of dog is drawn?
 000000129.jpg,What color is the canvas?
@@ -571,7 +571,7 @@ Image,Question
 000000145.jpg,What color is the door?
 000000146.jpg,Is the floor dirty in this image?
 000000146.jpg,How many lemons are in this image?
-000000146.jpg,Are the red, white and blue stripes in this image?
+000000146.jpg,"Are the red, white and blue stripes in this image?"
 000000146.jpg,Does the image say The Stone Roses?
 000000146.jpg,What words are in this image?
 000000147.jpg,How many people are in this image?
@@ -1510,10 +1510,10 @@ Image,Question
 000000384.jpg,How many leaves does the image have?
 000000384.jpg,How many fruits are seen in the image?
 000000385.jpg,What type of camera would produce the objects in the image?
-000000385.jpg,How many photographs are in the image?
-000000385.jpg,Which photograph is lighter?
-000000385.jpg,How many photographs are in the image?
-000000385.jpg,Which photograph is lighter?
+000000385.jpg,"How many photographs are in the image?
+000000385.jpg,Which photograph is lighter?"
+000000385.jpg,"How many photographs are in the image?
+000000385.jpg,Which photograph is lighter?"
 000000386.jpg,What is the color of the image?
 000000386.jpg,Is the image blurry?
 000000386.jpg,What is the photo shown in the image?
@@ -1630,7 +1630,7 @@ Image,Question
 000000412.jpg,What is the image about?
 000000412.jpg,What is the color of the background?
 000000413.jpg,What is the brand of the object?
-000000413.jpg,What is the color of the background?
+000000413.jpg,"What is the color of the background?
 000000413.jpg,What is the image about?
 000000413.jpg,What is the object used for?
 000000413.jpg,What is the color of the object?
@@ -1716,7 +1716,7 @@ Image,Question
 000000430.jpg,dd
 000000431.jpg,What is the image about?
 000000431.jpg,What is the object used for?
-000000431.jpg,What is the color of the background?
+000000431.jpg,What is the color of the background?"
 000000414.jpg,What is behind the girl?
 000000414.jpg,What color is this girls jacket?
 000000414.jpg,What is this girl holding?
@@ -1802,7 +1802,7 @@ Image,Question
 000000432.jpg,What is the object used for?
 000000432.jpg,What is the color of the object?
 000000432.jpg,What is the shape of the object?
-000000432.jpg,What is the color of the background?
+000000432.jpg,"What is the color of the background?
 000000432.jpg,What is the image about?
 000000434.jpg,What is the color of the object?
 000000434.jpg,What is the shape of the object?
@@ -1835,7 +1835,7 @@ Image,Question
 000000441.jpg,What is the image about?
 000000441.jpg,What is the color of the object?
 000000444.jpg,What is the color of the background?
-000000444.jpg,What is the shape of the object?
+000000444.jpg,What is the shape of the object?"
 000000434.jpg,Is the object in the image blue?
 000000434.jpg,What color is the main object in the image?
 000000434.jpg,Can I sit on the object shown in the image?
@@ -1873,9 +1873,9 @@ Image,Question
 000000445.jpg,What is the shape of the object?
 000000445.jpg,What is the image about?
 000000445.jpg,What is the color of the background?
-000000445.jpg,What is the color of the object?
+000000445.jpg,"What is the color of the object?
 000000447.jpg,What is the shape of the object?
-000000447.jpg,What is the color of the background?
+000000447.jpg,What is the color of the background?"
 000000447.jpg,What is the object used for?
 000000447.jpg,What is the image about?
 000000447.jpg,What is the color of the object?
@@ -1895,13 +1895,13 @@ Image,Question
 000000450.jpg,What is the color of the background?
 000000450.jpg,What is the object used for?
 000000452.jpg,What is the color of the object?
-000000452.jpg,What is the image about?
+000000452.jpg,"What is the image about?
 000000452.jpg,What is the color of the background?
 000000452.jpg,What is the object used for?
 000000453.jpg,What is the color of the object?
 000000453.jpg,What is the color of the background?
 000000453.jpg,What is the shape of the object?
-000000453.jpg,What is the image about?
+000000453.jpg,What is the image about?"
 000000452.jpg,What is the shape of the object?
 000000453.jpg,What is the object used for?
 000000454.jpg,What is the shape of the object?
@@ -1920,10 +1920,10 @@ Image,Question
 000000456.jpg,What is the color of the object?
 000000456.jpg,What is the object used for?
 000000457.jpg,What is the image about?
-000000457.jpg,What is the shape of the object?
+000000457.jpg,"What is the shape of the object?
 000000457.jpg,What is the color of the background?
 000000457.jpg,What is the color of the object?
-000000457.jpg,What is the object used for?
+000000457.jpg,What is the object used for?"
 000000458.jpg,What is the image about?
 000000458.jpg,What is the color of the object?
 000000458.jpg,What is the object used for?
