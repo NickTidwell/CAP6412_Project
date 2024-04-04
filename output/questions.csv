@@ -26,9 +26,6 @@ Image,Question
 000000004.jpg,Is there anything melting in the image?
 000000005.jpg,How would you describe the rug?
 000000005.jpg,How many plants are there?
-000000005.jpg,What time is it in the image?
-000000005.jpg,How would you describe the rug?
-000000005.jpg,What is shown in the image?
 000000005.jpg,What is in the bottom center shelf?
 000000005.jpg,What time is it in the image?
 000000005.jpg,What is shown in the image?
@@ -194,7 +191,6 @@ Image,Question
 000000050.jpg,where are the man's hands?
 000000051.jpg,Is this shirt for a man or a woman?
 000000051.jpg,What is shown in the image?
-000000051.jpg,Is this shirt for a man or a woman?
 000000051.jpg,what color is the shirt?
 000000051.jpg,What football team is represented on the shirt?
 000000051.jpg,What city does the team on the shirt play in?
@@ -206,7 +202,6 @@ Image,Question
 000000053.jpg,Is there a dog in the photograph?
 000000053.jpg,How many  white couches are shown?
 000000053.jpg,Is there a musical instrument in the photo?
-000000053.jpg,Is there a dog in the photograph?
 000000053.jpg,How many windows are in the image?
 000000053.jpg,What is shown in the image?
 000000054.jpg,what color is the object?
@@ -297,6 +292,7 @@ Image,Question
 000000073.jpg,what is the bird sitting on?
 000000073.jpg,How many feet is the bird currently standing with?
 000000073.jpg,What kind of bird is this?
+000000073.jpg,What is shown in the image?
 000000073.jpg,What is the bird doing?
 000000074.jpg,What does the bookmark say?
 000000074.jpg,Is this bookmark intended to be funny?
@@ -365,7 +361,6 @@ Image,Question
 000000092.jpg,What kind of car is this?
 000000093.jpg,What is shown in the image?
 000000093.jpg,Are there buildings in this image?
-000000093.jpg,What is shown in the image?
 000000093.jpg,Are there cars in this image?
 000000093.jpg,What city is this from?
 000000093.jpg,What type of road is this?
@@ -488,11 +483,9 @@ Image,Question
 000000125.jpg,what color is the shirt?
 000000125.jpg,What is on the shirt?
 000000125.jpg,What is shown in the image?
-000000125.jpg,what color is the shirt?
-000000125.jpg,Is the shirt long or short sleeved?
 000000125.jpg,What is on the hangar?
-000000125.jpg,What is on the shirt?
 000000126.jpg,What is shown in the image?
+000000126.jpg,What instrument is the man playing?
 000000126.jpg,Does this man like to sing?
 000000126.jpg,What color shirt is the man wearing?
 000000126.jpg,What kind of building is this man in?
