@@ -20,7 +20,7 @@ class EloRatingSystem:
         else:
             model_list = MODEL_LIST
             initial_elo = INIT_VALUE
-            elo_data = {"Model": model_list, "ELO": [initial_elo] * len(model_list)}
+            elo_data = {"Model": model_list, "ELO": [initial_elo] * len(model_list), "TEST_COUNT": 0}
             elo_df = pd.DataFrame(elo_data)
             elo_df.set_index('Model', inplace=True)
             elo_df.to_csv(elo_csv_path, index=False)
@@ -46,6 +46,8 @@ class EloRatingSystem:
         self.elo_df.loc[player_a, "ELO"] = new_rating_a
         self.elo_df.loc[player_b, "ELO"] = new_rating_b
 
+        self.elo_df.loc[player_a, "TEST_COUNT"] += 1
+        self.elo_df.loc[player_b, "TEST_COUNT"] += 1
         self.elo_df.to_csv("output/elo.csv")  # Save updated ELO ratings
 
         return new_rating_a, new_rating_b

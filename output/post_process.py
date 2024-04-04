@@ -1,5 +1,20 @@
 import json
 import csv
+import re
+def extract_answer(pre_text, input_string):
+    # Define the pattern using regex
+    pattern = fr'{pre_text}:\s*(.+)'
+
+    match = re.search(pattern, input_string)
+
+    if match:
+        # Extract the captured group which contains everything after "ASSISTANT:" and the following space
+        return match.group(1)
+    else:
+        return None
+
+
+
 def load_csv_as_indexed_list(csv_file):
     indexed_list = []
     with open(csv_file, newline='') as csvfile:
@@ -29,17 +44,19 @@ def process_json(json_file, output_dict):
         elif json_file == 'instructblip_ans.json':
             output_dict[(image_path, question)]['INSTRUCT_BLIP'] = value['ans']
         elif json_file == 'llava_ans.json':
-            output_dict[(image_path, question)]['LLAVA'] = value['ans']
+            output_dict[(image_path, question)]['LLAVA'] =  extract_answer("ASSISTANT", value['ans'])
         elif json_file == 'git_ans.json':
             output_dict[(image_path, question)]['GIT'] = value['ans']
         elif json_file == 'kosmos2_ans.json':
-            output_dict[(image_path, question)]['KOSMOS2'] = value['ans']
+            output_dict[(image_path, question)]['KOSMOS2'] = extract_answer("Answer", value['ans'])
+        elif json_file == 'vilt_ans.json':
+            output_dict[(image_path, question)]['VILT'] = value['ans']
         else:
             # Handle other cases if necessary
             pass
     
 # List of JSON files
-json_files = ['blip2_ans.json', 'git_ans.json', 'instructblip_ans.json', 'kosmos2_ans.json', 'llava_ans.json']
+json_files = ['blip2_ans.json', 'git_ans.json', 'instructblip_ans.json', 'kosmos2_ans.json', 'llava_ans.json', 'vilt_ans.json']
 
 # Dictionary to store output grouped by image path and question
 output_dict = {}
