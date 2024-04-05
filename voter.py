@@ -4,38 +4,10 @@ import os
 from PIL import ImageTk, Image
 import random
 import logging
-
+from EloSystem import EloRatingSystem
+from model_info import MODEL_LIST, data
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)  # Change the level as needed
-#Mock Sample Data for nwo
-data = [
-    {
-        "image_path": "data/000000000.jpg",
-        "question": "Which model is better?",
-        "BLIP2": "BLIP2 is better because...",
-        "INSTRUCT_BLIP": "INSTRUCT_BLIP is better because...",
-        "LLAVA": "Model 1 is better because...",
-        "GIT": "Model 2 is better because...",
-    },
-    {
-        "image_path": "data/000000001.jpg",
-        "question": "Which Do you like better?",
-        "BLIP2": "BLIP2answer",
-        "INSTRUCT_BLIP": "INSTRUCT_BLIP answer",
-        "LLAVA": "LLAVA answer",
-        "GIT": "GIT answer",
-    },
-    {
-        "image_path": "data/000000002.jpg",
-        "question": "Another Test Questino?",
-        "INSTRUCT_BLIP": "INSTRUCT_BLIP sample answer",
-        "BLIP2": "BLIP2answer sample",
-        "LLAVA": "LLAVA is better because...",
-        "GIT": "GIT is better because...",
-    },
-]
-
-MODEL_LIST = ["BLIP2", "INSTRUCT_BLIP", "LLAVA", "GIT"]
 
 #Intialize Voting List to 0
 voting_dict = {}
@@ -52,6 +24,7 @@ def get_random_datapoint_indice():
 
 class ImageComparisonApp:
     def __init__(self, root):
+        self.elo_system = EloRatingSystem()
         self.root = root
         self.root.title("Image Comparison App")
         self.image_frame = tk.Frame(root)
@@ -125,7 +98,6 @@ class ImageComparisonApp:
         self.answer2_text.grid(row=5, column=1, padx=10, sticky="w")
         self.answer2_text.insert("1.0", data[self.current_data_index][MODEL_LIST[self.model2]])
         self.answer2_text.config(state="disabled")
-
     def create_vote_buttons(self):
         self.vote_label = tk.Label(self.root, text="Vote for Best Model:")
         self.vote_label.pack(anchor="center")
@@ -146,7 +118,6 @@ class ImageComparisonApp:
         self.print_dict_button = tk.Button(self.root, text="Display Votes", command=self.display_results, width=15)
         self.print_dict_button.pack(side="right", padx=5)
     def update_form(self):
-
         self.current_data_index = get_random_datapoint_indice()
         self.model1, self.model2 = get_random_model_indices()
         while not self.validate_data_exist():
@@ -157,7 +128,6 @@ class ImageComparisonApp:
         self.create_caption_text_boxes()
         self.create_answer_labels()
         self.create_answer_text_boxes()
-        
     def vote(self, selected_model, vote_id):
         logging.info(f"Voted for: {selected_model}")
         logging.info(f"Model 1 was: {MODEL_LIST[self.model1]}")
@@ -167,12 +137,18 @@ class ImageComparisonApp:
         #TODO:: ELO THINGS
         if(vote_id == 1):
             voting_dict[MODEL_LIST[self.model1]] += 1
+            self.elo_system.update_ratings(MODEL_LIST[self.model1], MODEL_LIST[self.model2], 1)
         elif(vote_id == 2):
             voting_dict[MODEL_LIST[self.model2]] += 1
+            self.elo_system.update_ratings(MODEL_LIST[self.model1], MODEL_LIST[self.model2], 0)
+        else:
+            self.elo_system.update_ratings(MODEL_LIST[self.model1], MODEL_LIST[self.model2], 0.5)
 
         self.update_form()
     def display_results(self):
         print(voting_dict)
+        print("")
+        self.elo_system.print_elo()
 if __name__ == "__main__":
     root = tk.Tk()
     app = ImageComparisonApp(root)

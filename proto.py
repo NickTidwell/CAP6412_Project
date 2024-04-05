@@ -6,7 +6,7 @@ import os
 from tqdm import tqdm
 import pandas as pd
 
-models = ['blip2', 'instructblip', 'llava', 'git', 'kosmos2']
+models = ['blip2', 'instructblip', 'llava', 'git', 'kosmos2', 'vilt']
 
 anno = pd.read_csv('output/questions.csv')
     
@@ -64,7 +64,8 @@ def getGIT(device):
         input_ids = [processor.tokenizer.cls_token_id] + input_ids
         input_ids = torch.tensor(input_ids).unsqueeze(0).to(device)
         generated_ids = model.generate(pixel_values=pixel_values, input_ids=input_ids, max_length=51)
-        final = processor.batch_decode(generated_ids, skip_special_tokens=True)
+        final = processor.batch_decode(generated_ids, skip_special_tokens=True)[0][len(txt)+1:]
+        return final
     return model, processor, template, forward
     
 def getKOSMOS2(device):
@@ -88,11 +89,26 @@ def getKOSMOS2(device):
         return final
     return model, processor, template, forward
     
+def getVILT(device):
+    from transformers import ViltProcessor, ViltForQuestionAnswering
+    model = ViltForQuestionAnswering.from_pretrained("dandelin/vilt-b32-finetuned-vqa").to(device)
+    processor = ViltProcessor.from_pretrained("dandelin/vilt-b32-finetuned-vqa")
+    template = "{}"
+    
+    def forward(model, processor, image, text):
+        encoding = processor(image, text, return_tensors="pt").to(device)
+        outputs = model(**encoding)
+        logits = outputs.logits
+        idx = logits.argmax(-1).item()
+        return model.config.id2label[idx]
+    return model, processor, template, forward
+    
 _mfuncdict = {'blip2': getBLIP2,
               'instructblip': getInstructBLIP,
               'llava': getLLAVA,
               'git': getGIT,
-              'kosmos2': getKOSMOS2}
+              'kosmos2': getKOSMOS2,
+              'vilt': getVILT}
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='generate VQ answers for a given model.')
@@ -121,7 +137,7 @@ if __name__ == '__main__':
         print(quesid,',',question)
         txt = template.format(question)
         
-        img = Image.open(os.path.join(imgdir, imgpth))
+        img = Image.open(os.path.join(imgdir, imgpth)).convert('RGB')
         
         final = forward(model, processor, img, txt)
         print(final)
