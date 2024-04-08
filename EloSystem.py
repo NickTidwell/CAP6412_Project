@@ -1,4 +1,5 @@
 import pandas as pd
+import json
 import os
 from model_info import MODEL_LIST
 INIT_VALUE = 500
@@ -56,3 +57,39 @@ class EloRatingSystem:
         return 1 / (10 ** ((player_b_rating - player_a_rating) / SCALING_FACTOR) + 1)
     def print_elo(self):
         print(self.elo_df)
+
+
+class StatsCounter:
+    def __init__(self, json_file):
+        self.json_file = json_file
+        self.dictionary = self.load_from_json()
+
+    def update_count(self, string1, string2):
+        # Sort the strings to ensure consistent ordering
+        sorted_strings = tuple(sorted([string1, string2]))
+        key = sorted_strings[0] + "#" + sorted_strings[1]
+        if key in self.dictionary:
+            self.dictionary[key] += 1
+        else:
+            self.dictionary[key] = 1
+        self.save_to_json()
+
+    def print_dictionary(self):
+        for key, value in sorted(self.dictionary.items()):
+            parts = key.split("#")
+
+            print(f'{parts[0]} vs {parts[1]}: {value}')
+
+    def save_to_json(self):
+        with open(self.json_file, 'w') as f:
+            json.dump(self.dictionary, f)
+
+    def load_from_json(self):
+        if not os.path.exists(self.json_file):
+            with open(self.json_file, 'w') as f:
+                f.write('{}')
+        try:
+            with open(self.json_file, 'r') as f:
+                return json.load(f)
+        except FileNotFoundError:
+            return {}
