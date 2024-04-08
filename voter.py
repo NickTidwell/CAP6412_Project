@@ -4,7 +4,7 @@ import os
 from PIL import ImageTk, Image
 import random
 import logging
-from EloSystem import EloRatingSystem
+from EloSystem import EloRatingSystem, StatsCounter
 from model_info import MODEL_LIST, data
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)  # Change the level as needed
@@ -25,6 +25,7 @@ def get_random_datapoint_indice():
 class ImageComparisonApp:
     def __init__(self, root):
         self.elo_system = EloRatingSystem()
+        self.stats_counter = StatsCounter("output/stats_counter.json")
         self.root = root
         self.root.title("Image Comparison App")
         self.image_frame = tk.Frame(root)
@@ -89,12 +90,12 @@ class ImageComparisonApp:
         self.answer2_label = tk.Label(self.image_frame, text="Answer 2:")
         self.answer2_label.grid(row=4, column=1, padx=10, sticky="w")
     def create_answer_text_boxes(self):
-        self.answer1_text = tk.Text(self.image_frame, height=3, width=50, wrap="word")
+        self.answer1_text = tk.Text(self.image_frame, height=10, width=50, wrap="word")
         self.answer1_text.grid(row=5, column=0, padx=10, sticky="w")
         self.answer1_text.insert("1.0", data[self.current_data_index][MODEL_LIST[self.model1]])
         self.answer1_text.config(state="disabled")  # Set to disabled after inserting text
 
-        self.answer2_text = tk.Text(self.image_frame, height=3, width=50, wrap="word")
+        self.answer2_text = tk.Text(self.image_frame, height=10, width=50, wrap="word")
         self.answer2_text.grid(row=5, column=1, padx=10, sticky="w")
         self.answer2_text.insert("1.0", data[self.current_data_index][MODEL_LIST[self.model2]])
         self.answer2_text.config(state="disabled")
@@ -134,7 +135,6 @@ class ImageComparisonApp:
         logging.info(f"Model 2 was: {MODEL_LIST[self.model2]}")
         logging.info("=======================================")
 
-        #TODO:: ELO THINGS
         if(vote_id == 1):
             voting_dict[MODEL_LIST[self.model1]] += 1
             self.elo_system.update_ratings(MODEL_LIST[self.model1], MODEL_LIST[self.model2], 1)
@@ -143,12 +143,14 @@ class ImageComparisonApp:
             self.elo_system.update_ratings(MODEL_LIST[self.model1], MODEL_LIST[self.model2], 0)
         else:
             self.elo_system.update_ratings(MODEL_LIST[self.model1], MODEL_LIST[self.model2], 0.5)
-
+        self.stats_counter.update_count(MODEL_LIST[self.model1], MODEL_LIST[self.model2])
         self.update_form()
     def display_results(self):
         print(voting_dict)
         print("")
         self.elo_system.print_elo()
+        print("")
+        self.stats_counter.print_dictionary()
 if __name__ == "__main__":
     root = tk.Tk()
     app = ImageComparisonApp(root)
