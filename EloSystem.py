@@ -5,17 +5,18 @@ from model_info import MODEL_LIST
 INIT_VALUE = 500
 SCALING_FACTOR = 400
 class EloRatingSystem:
-    def __init__(self, k_factor=32):
+    def __init__(self, k_factor=32, elo_csv_path = "output/elo.csv"):
         """
         Initializes the Elo rating system.
         Args:
             k_factor (float, optional): Sensitivity factor (default is 32).
         """
         self.k_factor = k_factor
-        self.elo_df = self.load_elo_csv()
+        self.elo_df = self.load_elo_csv(elo_csv_path)
+        self.elo_csv_path = elo_csv_path
 
-    def load_elo_csv(self):
-        elo_csv_path = "output/elo.csv"
+    def load_elo_csv(self, elo_csv_path):
+        elo_csv_path = elo_csv_path
         if os.path.exists(elo_csv_path):
             return pd.read_csv(elo_csv_path, index_col="Model")
         else:
@@ -49,12 +50,13 @@ class EloRatingSystem:
 
         self.elo_df.loc[player_a, "TEST_COUNT"] += 1
         self.elo_df.loc[player_b, "TEST_COUNT"] += 1
-        self.elo_df.to_csv("output/elo.csv")  # Save updated ELO ratings
+        self.elo_df.to_csv(self.elo_csv_path)  # Save updated ELO ratings
 
         return new_rating_a, new_rating_b
 
     def calculate_expected_score(self, player_a_rating, player_b_rating):
         return 1 / (10 ** ((player_b_rating - player_a_rating) / SCALING_FACTOR) + 1)
+        
     def print_elo(self):
         print(self.elo_df)
 
