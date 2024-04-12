@@ -17,7 +17,7 @@ import uvicorn
 
 from server_utils.constants import WORKER_HEART_BEAT_INTERVAL, LOGDIR
 from server_utils.utils import build_logger, server_error_msg, pretty_print_semaphore
-from peng_utils import get_model, get_device_name, generate_stream
+from model_utils import get_model, get_device_name, generate_stream
 
 global_counter = 0
 model_semaphore = None
