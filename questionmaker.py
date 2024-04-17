@@ -46,11 +46,13 @@ class ImageLabelApp:
         # Check if all entry widgets have inputs
         for question in self.questions:
             question.trace_add("write", self.check_inputs)
+
     def select_directory(self):
         directory = filedialog.askdirectory()
         self.image_dir = tk.StringVar()
         if directory:
             self.image_dir.set(directory)
+
     def save_and_next(self):
         # Save user input for the current image
         image_name = self.image_files[self.current_image_index]
@@ -67,28 +69,32 @@ class ImageLabelApp:
         while self.image_files[self.current_image_index] in self.df['Image'].values:
             self.current_image_index += 1
             self.display_next_image()
+
     def display_next_image(self):
         if self.current_image_index < len(self.image_files):
             image_path = os.path.join(self.image_dir.get(), self.image_files[self.current_image_index])
             img = Image.open(image_path)
-            img = img.resize((400, 400), Image.ANTIALIAS)
+            img = img.resize((400, 400), Image.Resampling.LANCZOS)
             img_tk = ImageTk.PhotoImage(img)
             # Update the label with the new image
             self.image_label.config(image=img_tk)
             self.image_label.image = img_tk
         else:
             print("All images processed!")
+
     def loop_frames(self):
         # Create a label widget to display images
         self.image_label = tk.Label(self.root)
         self.image_label.pack()
         self.save_and_next()
+
     def check_inputs(self, *args):
         # Enable the "Save and Next" button if all entry widgets have non-empty values
         if all(question.get() for question in self.questions):
             self.button_save_next.config(state=tk.NORMAL)
         else:
             self.button_save_next.config(state=tk.DISABLED)
+
     def save_dataframe(self):
         output_dir = "output"
         os.makedirs(output_dir, exist_ok=True)
