@@ -33,6 +33,7 @@ class ImageComparisonApp:
         self.current_data_index = 0  # Initialize with rnd index of image/data
         self.update_form()
         self.create_vote_buttons()
+
     def load_images(self):
         current_directory = os.getcwd()
         self.image1 = ImageTk.PhotoImage(Image.open(os.path.join(current_directory, data[self.current_data_index]["image_path"])))
@@ -52,6 +53,7 @@ class ImageComparisonApp:
             logging.debug(f"{MODEL_LIST[self.model2]} is missing.")
             return False
         return True
+
     def create_image_labels(self):
         self.model1_label = tk.Label(self.image_frame, text="Model 1")
         self.model1_label.grid(row=0, column=0, padx=10)
@@ -89,6 +91,7 @@ class ImageComparisonApp:
 
         self.answer2_label = tk.Label(self.image_frame, text="Answer 2:")
         self.answer2_label.grid(row=4, column=1, padx=10, sticky="w")
+
     def create_answer_text_boxes(self):
         self.answer1_text = tk.Text(self.image_frame, height=10, width=50, wrap="word")
         self.answer1_text.grid(row=5, column=0, padx=10, sticky="w")
@@ -99,6 +102,7 @@ class ImageComparisonApp:
         self.answer2_text.grid(row=5, column=1, padx=10, sticky="w")
         self.answer2_text.insert("1.0", data[self.current_data_index][MODEL_LIST[self.model2]])
         self.answer2_text.config(state="disabled")
+
     def create_vote_buttons(self):
         self.vote_label = tk.Label(self.root, text="Vote for Best Model:")
         self.vote_label.pack(anchor="center")
@@ -118,6 +122,7 @@ class ImageComparisonApp:
         # Create the "Print Dictionary" button
         self.print_dict_button = tk.Button(self.root, text="Display Votes", command=self.display_results, width=15)
         self.print_dict_button.pack(side="right", padx=5)
+
     def update_form(self):
         self.current_data_index = get_random_datapoint_indice()
         self.model1, self.model2 = get_random_model_indices()
@@ -129,6 +134,7 @@ class ImageComparisonApp:
         self.create_caption_text_boxes()
         self.create_answer_labels()
         self.create_answer_text_boxes()
+
     def vote(self, selected_model, vote_id):
         logging.info(f"Voted for: {selected_model}")
         logging.info(f"Model 1 was: {MODEL_LIST[self.model1]}")
@@ -145,12 +151,14 @@ class ImageComparisonApp:
             self.elo_system.update_ratings(MODEL_LIST[self.model1], MODEL_LIST[self.model2], 0.5)
         self.stats_counter.update_count(MODEL_LIST[self.model1], MODEL_LIST[self.model2])
         self.update_form()
+
     def display_results(self):
         print(voting_dict)
         print("")
         self.elo_system.print_elo()
         print("")
         self.stats_counter.print_dictionary()
+
 if __name__ == "__main__":
     root = tk.Tk()
     app = ImageComparisonApp(root)
