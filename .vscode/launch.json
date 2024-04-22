@@ -1,0 +1,27 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Model Worker Debug",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/model_worker.py",
+      "args": ["--model-name", "instruct_blip"],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Python: Controller Debug",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/controller.py",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Python: Server Demo Debug",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/server_demo.py",
+      "console": "integratedTerminal"
+    }
+  ]
+}

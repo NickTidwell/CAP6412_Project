@@ -148,7 +148,7 @@ class ModelWorker:
             yield json.dumps(ret).encode() + b"\0"
 
 
-app = FastAPI()
+app = FastAPI(swagger_ui_parameters={"syntaxHighlight": True})
 
 
 def release_model_semaphore():

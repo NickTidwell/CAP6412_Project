@@ -4,6 +4,15 @@ pillow==10.2.0
 python-dateutil==2.9.0.post0
 pytz==2024.1
 six==1.16.0
-pip install gradio==3.48.0
-uvicorn 
+gradio==3.48.0
+setuptools
+torch
+uvicorn
 fastapi
+transformers
+omegaconf
+timm
+iopath
+fairscale
+opencv-python
+sentencepiece

@@ -60,9 +60,9 @@ def get_device_name(device: torch.device):
 def generate_stream(model, text, image, device=None, keep_in_device=False):
     image = np.array(image, dtype='uint8')
     image = Image.fromarray(image.astype('uint8')).convert('RGB')
-    if device != model.device:
-        model.move_to_device(device)
-    output = model.generate(image, text, device, keep_in_device)
+    #if device != model.device:
+    model.move_to_device(device)
+    output = model.generate(image, text)
     if not keep_in_device:
         model.move_to_device(None)
     print(f"{'#' * 20} Model out: {output}")
