@@ -1,2 +1,2 @@
 # CAP6412_Project
-A Project in Computer Vision
+LVLM Arena with automated judging. Results show that LLaVa evaluations of LVLMs matched the evaluations of humans.
